@@ -6,6 +6,8 @@ services:
     stdin_open: true
     ports:
       - 3000:3000
+    depends_on:
+      - api
     networks:
       - limsplus_network
   # Backend Service
@@ -17,6 +19,14 @@ services:
       - mongo
     networks:
       - limsplus_network
+    # command:
+    #   - bash
+    #   - -c
+    #   - |
+    #     echo "----------------------------------------------"
+    #     echo "Congratulation! You can access now"
+    #     echo "http://localhost:3000"
+    #     while true; do sleep 10000; done
   # Mongodb service
   mongo:
     build:
