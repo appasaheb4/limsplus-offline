@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"830d4455b4da439eb3f98cfabb6a27c6","collectionName":"instrument-result-mappings","type":"collection"}
