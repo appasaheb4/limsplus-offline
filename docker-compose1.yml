@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  # LimsPlus portal
+  app:
+    image: onlyappasaheb4/limsplus-portal:latest
+    stdin_open: true
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
+    networks:
+      - limsplus_network
+  # Backend Service
+  api:
+    image: onlyappasaheb4/limsplus-services:latest
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mongo
+    networks:
+      - limsplus_network
+    # command:
+    #   - bash
+    #   - -c
+    #   - |
+    #     echo "----------------------------------------------"
+    #     echo "Congratulation! You can access now"
+    #     echo "http://localhost:3000"
+    #     while true; do sleep 10000; done
+  # Mongodb service
+  mongo:
+    build:
+      context: .
+      dockerfile: DockerfileDB
+    container_name: mongo
+    restart: always
+    ports:
+      - 2717:27017
+    volumes:
+      - limsplus:/data/db
+    networks:
+      - limsplus_network
+networks:
+  limsplus_network:
+    driver: bridge
+volumes:
+  limsplus:
+    driver: local

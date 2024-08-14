@@ -1,11 +1,6 @@
-#STAGE 1 Mongo
 FROM mongo:6.0
 RUN mkdir /database
 COPY src/common/database/dump /database/dump
-# CMD mongosh; \
-#     use limsplus-prod; \
-#     db.dropDatabase(); \
-#     exit; 
 CMD mongod --fork --logpath /var/log/mongodb.log; \
     mongorestore /database/dump/; \
     mongod --shutdown; \
